@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <!-- motion lines behind the red piece -->
+    <path
+        android:strokeColor="#C8A15A"
+        android:strokeWidth="3"
+        android:strokeLineCap="round"
+        android:pathData="M22,50 L32,50 M20,58 L30,58 M24,66 L32,66" />
+    <!-- blue piece being shoved -->
+    <path
+        android:fillColor="#1E90FF"
+        android:pathData="M68,50 m-13,0 a13,13 0 1,0 26,0 a13,13 0 1,0 -26,0" />
+    <path
+        android:strokeColor="#654321"
+        android:strokeWidth="3"
+        android:fillColor="#00000000"
+        android:pathData="M68,50 m-13,0 a13,13 0 1,0 26,0 a13,13 0 1,0 -26,0" />
+    <!-- red piece charging -->
+    <path
+        android:fillColor="#DC143C"
+        android:pathData="M44,60 m-13,0 a13,13 0 1,0 26,0 a13,13 0 1,0 -26,0" />
+    <path
+        android:strokeColor="#654321"
+        android:strokeWidth="3"
+        android:fillColor="#00000000"
+        android:pathData="M44,60 m-13,0 a13,13 0 1,0 26,0 a13,13 0 1,0 -26,0" />
+    <!-- impact spark -->
+    <path
+        android:strokeColor="#FFD700"
+        android:strokeWidth="3"
+        android:strokeLineCap="round"
+        android:pathData="M58,42 L62,36 M62,48 L69,44 M54,38 L55,31" />
+</vector>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="cream">#F5F5DC</color>
+    <color name="cream_dark">#EAE3C8</color>
+    <color name="wood">#8B5A2B</color>
+    <color name="wood_dark">#654321</color>
+    <color name="cell_tan">#D2B48C</color>
+    <color name="p1_red">#DC143C</color>
+    <color name="p2_blue">#1E90FF</color>
+    <color name="gold">#FFD700</color>
+    <color name="text_main">#323232</color>
+    <color name="text_soft">#6B6B5E</color>
+    <color name="hint_green">#5FA85F</color>
+    <color name="hint_orange">#E8A33D</color>
+    <color name="disabled_gray">#9E9E9E</color>
+    <color name="ic_launcher_bg">#F0E6C8</color>
+</resources>

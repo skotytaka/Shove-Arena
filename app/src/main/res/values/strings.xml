@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Shove Arena</string>
+    <string name="app_title">SHOVE ARENA</string>
+    <string name="menu_subtitle">A sly duel of shoves on a 5×5 board</string>
+    <string name="menu_two_players">Two players</string>
+    <string name="menu_vs_bot">Play vs bot</string>
+    <string name="menu_rules">Rules</string>
+    <string name="menu_settings">Settings</string>
+    <string name="version_label">Beta 0.2.8 — skotytaka</string>
+
+    <string name="difficulty_title">Bot difficulty</string>
+    <string name="diff_easy">Easy</string>
+    <string name="diff_medium">Medium</string>
+    <string name="diff_hard">Hard</string>
+    <string name="bot_name">Bot</string>
+    <string name="bot_thinking">Bot is thinking…</string>
+    <string name="default_p1">Player 1</string>
+    <string name="default_p2">Player 2</string>
+
+    <string name="settings_players">PLAYERS</string>
+    <string name="settings_game">GAME</string>
+    <string name="settings_language">LANGUAGE</string>
+    <string name="settings_sound">SOUND &amp; FEEL</string>
+    <string name="name_hint">Name</string>
+    <string name="avatar_hint">Tap a circle to pick an avatar from the gallery. Long-press to reset.</string>
+    <string name="win_mode">Win condition</string>
+    <string name="win_first_blood">First blood — lose one piece and you lose</string>
+    <string name="win_last">To the last — you lose when all your pieces are gone</string>
+    <string name="pieces_label">Pieces per player</string>
+    <string name="pieces_2">2 (classic)</string>
+    <string name="pieces_3">3 (extended)</string>
+    <string name="lang_system">System default</string>
+    <string name="lang_uk">Українська</string>
+    <string name="lang_en">English</string>
+    <string name="sounds">Sound effects</string>
+    <string name="music">Music</string>
+    <string name="vibration">Vibration</string>
+
+    <string name="rules_title">Rules</string>
+    <string name="rules_body">Goal: shove your opponent\'s pieces off the 5×5 board.\n\nSETUP\nPlayers take turns placing their pieces (2 or 3, per settings). You may not place on the edge, in the center, on an occupied cell, or — in the classic 2-piece game — in the same row or column as an enemy piece. If that last rule ever leaves no legal cell, it is lifted automatically.\n\nA TURN = TWO ACTIONS\n• Action 1 — move one of your pieces 1 cell horizontally or vertically.\n• Action 2 — move a DIFFERENT piece, use one ability, or end the turn.\nIf you have only one piece left, it may move twice.\n\nSHOVING\nMoving into an occupied cell pushes the whole chain of pieces by 1 — friend or foe. A piece pushed over the edge is out. Careful: you can shove your own piece off too!\n\nABILITIES (second action only; using one ends your turn)\n• Dash — one of your pieces moves 2 cells in a straight line, shoving everything in its way. Recharge: 3 turns.\n• Swap — swap one of your pieces with any other piece. Recharge: 4.\n• Shift — slide an entire row or column by 1. Pieces at the far edge fall off. Recharge: 4.\n• Anchor — one of your pieces becomes immovable until your next turn: it can\'t be shoved, swapped or shifted, and it blocks shoves and shifts through its line. Recharge: 3.\n\nVICTORY\n«First blood» — the opponent loses one piece. «To the last» — the opponent loses all pieces. If one action knocks out pieces of both players, the acting player wins.</string>
+
+    <string name="msg_place">%1$s: place your pieces (%2$d left)</string>
+    <string name="msg_place_relaxed">No legal cell — the «not in line with an enemy» rule is lifted</string>
+    <string name="msg_first_action">%1$s — action 1 of 2: move a piece</string>
+    <string name="msg_second_action">%1$s — action 2: another piece, an ability, or end turn</string>
+    <string name="msg_turn_skipped">%1$s cannot move — turn skipped</string>
+    <string name="msg_won">%1$s wins!</string>
+    <string name="msg_draw">Draw — no one can move</string>
+    <string name="score_fmt">Score — %1$s %2$d : %3$d %4$s</string>
+
+    <string name="err_cell_occupied">That cell is occupied</string>
+    <string name="err_center">The center must stay empty</string>
+    <string name="err_edge">Can\'t place on the edge</string>
+    <string name="err_opposite">Not in line with an enemy piece</string>
+    <string name="err_no_piece">There is no piece there</string>
+    <string name="err_not_yours">That is not your piece</string>
+    <string name="err_already_moved">That piece has already acted this turn</string>
+    <string name="err_one_step">Moves are exactly 1 cell</string>
+    <string name="err_anchor">Blocked by an anchored piece</string>
+    <string name="err_ability_second">Abilities can only be the second action</string>
+    <string name="err_ability_cd">That ability is recharging</string>
+    <string name="err_nothing_shift">No pieces in that line</string>
+    <string name="err_swap_own">The swap must include your piece</string>
+    <string name="err_not_allowed">You can\'t do that right now</string>
+
+    <string name="ability_dash">Dash</string>
+    <string name="ability_swap">Swap</string>
+    <string name="ability_shift">Shift</string>
+    <string name="ability_anchor">Anchor</string>
+    <string name="hint_dash_piece">Dash: choose your piece</string>
+    <string name="hint_dash_target">Dash: choose a cell 2 steps away</string>
+    <string name="hint_swap_first">Swap: choose the first piece</string>
+    <string name="hint_swap_second">Swap: choose the second piece</string>
+    <string name="hint_shift">Shift: tap an arrow at the edge of the board</string>
+    <string name="hint_anchor">Anchor: choose your piece to protect</string>
+    <string name="btn_skip">End turn</string>
+    <string name="btn_cancel">Cancel</string>
+
+    <string name="btn_rematch">Rematch</string>
+    <string name="btn_menu">Main menu</string>
+    <string name="exit_title">Leave the game?</string>
+    <string name="exit_text">The current match will be lost.</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+</resources>

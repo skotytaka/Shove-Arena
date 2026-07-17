@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Theme.Shove" parent="Theme.Material3.Light.NoActionBar">
+        <item name="colorPrimary">@color/wood</item>
+        <item name="colorOnPrimary">@color/cream</item>
+        <item name="colorSecondary">@color/p1_red</item>
+        <item name="colorOnSecondary">@android:color/white</item>
+        <item name="android:windowBackground">@color/cream</item>
+        <item name="android:statusBarColor">@color/cream</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:navigationBarColor">@color/cream</item>
+    </style>
+
+    <style name="Widget.Shove.Button" parent="Widget.Material3.Button">
+        <item name="android:textSize">17sp</item>
+        <item name="android:textColor">@color/cream</item>
+        <item name="backgroundTint">@color/wood</item>
+        <item name="cornerRadius">18dp</item>
+        <item name="android:minHeight">56dp</item>
+    </style>
+
+    <style name="Widget.Shove.Button.Outlined" parent="Widget.Material3.Button.OutlinedButton">
+        <item name="android:textSize">17sp</item>
+        <item name="android:textColor">@color/wood_dark</item>
+        <item name="strokeColor">@color/wood</item>
+        <item name="strokeWidth">2dp</item>
+        <item name="cornerRadius">18dp</item>
+        <item name="android:minHeight">56dp</item>
+    </style>
+
+    <style name="ShapeAppearance.Shove.Circle" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item>
+    </style>
+
+    <style name="Widget.Shove.Section" parent="">
+        <item name="android:textSize">13sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/wood_dark</item>
+        <item name="android:letterSpacing">0.08</item>
+    </style>
+
+</resources>

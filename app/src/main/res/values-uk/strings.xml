@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Shove Arena</string>
+    <string name="app_title">SHOVE ARENA</string>
+    <string name="menu_subtitle">Хитра дуель на дошці 5×5</string>
+    <string name="menu_two_players">Гра на двох</string>
+    <string name="menu_vs_bot">Гра з ботом</string>
+    <string name="menu_rules">Правила</string>
+    <string name="menu_settings">Налаштування</string>
+    <string name="version_label">Beta 0.2.8 — skotytaka</string>
+
+    <string name="difficulty_title">Складність бота</string>
+    <string name="diff_easy">Легкий</string>
+    <string name="diff_medium">Середній</string>
+    <string name="diff_hard">Складний</string>
+    <string name="bot_name">Бот</string>
+    <string name="bot_thinking">Бот думає…</string>
+    <string name="default_p1">Гравець 1</string>
+    <string name="default_p2">Гравець 2</string>
+
+    <string name="settings_players">ГРАВЦІ</string>
+    <string name="settings_game">ГРА</string>
+    <string name="settings_language">МОВА</string>
+    <string name="settings_sound">ЗВУК І ВІДЧУТТЯ</string>
+    <string name="name_hint">Ім\'я</string>
+    <string name="avatar_hint">Торкніться кола, щоб обрати аватар з галереї. Утримуйте, щоб скинути.</string>
+    <string name="win_mode">Умова перемоги</string>
+    <string name="win_first_blood">Перша кров — втратив фішку, програв</string>
+    <string name="win_last">До останнього — програв, коли всі фішки вибули</string>
+    <string name="pieces_label">Фішок у гравця</string>
+    <string name="pieces_2">2 (класика)</string>
+    <string name="pieces_3">3 (розширена)</string>
+    <string name="lang_system">Як у системі</string>
+    <string name="lang_uk">Українська</string>
+    <string name="lang_en">English</string>
+    <string name="sounds">Звукові ефекти</string>
+    <string name="music">Музика</string>
+    <string name="vibration">Вібрація</string>
+
+    <string name="rules_title">Правила</string>
+    <string name="rules_body">Мета: виштовхнути фішки суперника за межі дошки 5×5.\n\nРОЗСТАНОВКА\nГравці по черзі ставлять фішки (2 або 3 — залежно від налаштувань). Не можна: на край, у центр, на зайняту клітинку, а в класичній грі на 2 фішки — в один ряд чи колонку з фішкою суперника. Якщо дозволених клітинок не лишилося, останнє правило знімається автоматично.\n\nХІД = ДВІ ДІЇ\n• Дія 1 — пересуньте свою фішку на 1 клітинку по горизонталі або вертикалі.\n• Дія 2 — пересуньте ІНШУ фішку, застосуйте здібність або завершіть хід.\nЯкщо у вас лишилася одна фішка — вона може ходити двічі.\n\nШТОВХАННЯ\nРух у зайняту клітинку штовхає весь ланцюжок фішок на 1 — і свої, і чужі. Фішка, виштовхнута за край, вибуває. Обережно: власну фішку теж можна виштовхнути!\n\nЗДІБНОСТІ (лише другою дією; після застосування хід завершується)\n• Ривок — своя фішка рухається на 2 клітинки по прямій, штовхаючи все на шляху. Перезарядка: 3 ходи.\n• Обмін — поміняйте місцями свою фішку з будь-якою іншою. Перезарядка: 4.\n• Зсув — зсуньте цілий ряд або колонку на 1. Фішки на дальньому краю вилітають. Перезарядка: 4.\n• Якір — своя фішка стає непорушною до вашого наступного ходу: її не можна штовхати, міняти чи зсувати, і вона блокує штовхання та зсуви крізь свою лінію. Перезарядка: 3.\n\nПЕРЕМОГА\n«Перша кров» — суперник втратив одну фішку. «До останнього» — суперник втратив усі фішки. Якщо одна дія виштовхує фішки обох гравців, перемагає той, хто діяв.</string>
+
+    <string name="msg_place">%1$s: розставте фішки (ще %2$d)</string>
+    <string name="msg_place_relaxed">Немає дозволеної клітинки — правило «не напроти» знято</string>
+    <string name="msg_first_action">%1$s — дія 1 з 2: рух фішкою</string>
+    <string name="msg_second_action">%1$s — дія 2: інша фішка, здібність або кінець ходу</string>
+    <string name="msg_turn_skipped">%1$s не має ходу — хід пропущено</string>
+    <string name="msg_won">%1$s переміг!</string>
+    <string name="msg_draw">Нічия — ніхто не може ходити</string>
+    <string name="score_fmt">Рахунок — %1$s %2$d : %3$d %4$s</string>
+
+    <string name="err_cell_occupied">Клітинка вже зайнята</string>
+    <string name="err_center">Центр має бути порожнім</string>
+    <string name="err_edge">Не можна ставити на край</string>
+    <string name="err_opposite">Не напроти фішки суперника</string>
+    <string name="err_no_piece">Тут немає фішки</string>
+    <string name="err_not_yours">Це не ваша фішка</string>
+    <string name="err_already_moved">Ця фішка вже діяла цього ходу</string>
+    <string name="err_one_step">Рух — рівно на 1 клітинку</string>
+    <string name="err_anchor">Заблоковано фішкою з якорем</string>
+    <string name="err_ability_second">Здібності — лише другою дією</string>
+    <string name="err_ability_cd">Здібність відновлюється</string>
+    <string name="err_nothing_shift">У цій лінії немає фішок</string>
+    <string name="err_swap_own">В обміні має бути ваша фішка</string>
+    <string name="err_not_allowed">Зараз так не можна</string>
+
+    <string name="ability_dash">Ривок</string>
+    <string name="ability_swap">Обмін</string>
+    <string name="ability_shift">Зсув</string>
+    <string name="ability_anchor">Якір</string>
+    <string name="hint_dash_piece">Ривок: оберіть свою фішку</string>
+    <string name="hint_dash_target">Ривок: клітинка за 2 кроки</string>
+    <string name="hint_swap_first">Обмін: перша фішка</string>
+    <string name="hint_swap_second">Обмін: друга фішка</string>
+    <string name="hint_shift">Зсув: натисніть стрілку біля дошки</string>
+    <string name="hint_anchor">Якір: оберіть фішку для захисту</string>
+    <string name="btn_skip">Завершити хід</string>
+    <string name="btn_cancel">Скасувати</string>
+
+    <string name="btn_rematch">Реванш</string>
+    <string name="btn_menu">Головне меню</string>
+    <string name="exit_title">Покинути гру?</string>
+    <string name="exit_text">Поточну партію буде втрачено.</string>
+    <string name="yes">Так</string>
+    <string name="no">Ні</string>
+</resources>
