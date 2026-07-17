@@ -253,9 +253,6 @@ class BotPlayer(private val level: Int, seed: Long = System.nanoTime()) {
                 }
             }
         }
-        if (onEdge && !p.anchored && e.ability(enemy, AbilityType.SHIFT).ready) {
-            s -= 140.0 * lethal       // shift threat on the outer ring
-        }
         if (p.anchored) s += 30.0
         return s
     }

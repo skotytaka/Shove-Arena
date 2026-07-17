@@ -38,7 +38,7 @@
     <string name="vibration">Vibration</string>
 
     <string name="rules_title">Rules</string>
-    <string name="rules_body">Goal: shove your opponent\'s pieces off the 5×5 board.\n\nSETUP\nPlayers take turns placing their pieces (2 or 3, per settings). You may not place on the edge, in the center, on an occupied cell, or — in the classic 2-piece game — in the same row or column as an enemy piece. If that last rule ever leaves no legal cell, it is lifted automatically.\n\nA TURN = TWO ACTIONS\n• Action 1 — move one of your pieces 1 cell horizontally or vertically.\n• Action 2 — move a DIFFERENT piece, use one ability, or end the turn.\nIf you have only one piece left, it may move twice.\n\nSHOVING\nMoving into an occupied cell pushes the whole chain of pieces by 1 — friend or foe. A piece pushed over the edge is out. Careful: you can shove your own piece off too!\n\nABILITIES (second action only; using one ends your turn)\n• Dash — one of your pieces moves 2 cells in a straight line, shoving everything in its way. Recharge: 3 turns.\n• Swap — swap one of your pieces with any other piece. Recharge: 4.\n• Shift — slide an entire row or column by 1. Pieces at the far edge fall off. Recharge: 4.\n• Anchor — one of your pieces becomes immovable until your next turn: it can\'t be shoved, swapped or shifted, and it blocks shoves and shifts through its line. Recharge: 3.\n\nVICTORY\n«First blood» — the opponent loses one piece. «To the last» — the opponent loses all pieces. If one action knocks out pieces of both players, the acting player wins.</string>
+    <string name="rules_body">Goal: shove your opponent\'s pieces off the 5×5 board.\n\nSETUP\nPlayers take turns placing their pieces (2 or 3, per settings). You may not place on the edge, in the center, on an occupied cell, or — in the classic 2-piece game — in the same row or column as an enemy piece. If that last rule ever leaves no legal cell, it is lifted automatically.\n\nA TURN = TWO ACTIONS\n• Action 1 — move one of your pieces 1 cell horizontally or vertically.\n• Action 2 — move a DIFFERENT piece, use one ability, or end the turn.\nIf you have only one piece left, it may move twice.\n\nSHOVING\nMoving into an occupied cell pushes the whole chain of pieces by 1 — friend or foe. A piece pushed over the edge is out. Careful: you can shove your own piece off too!\n\nABILITIES (second action only; using one ends your turn)\n• Dash — one of your pieces moves 2 cells in a straight line, shoving everything in its way. Recharge: 3 turns.\n• Swap — swap one of your pieces with any other piece. Recharge: 4.\n• Magnet — pull an enemy piece 1 cell toward one of your pieces along a clear straight line. It can never pull a piece off the board. Recharge: 3.\n• Anchor — one of your pieces becomes immovable until your next turn: it can\'t be shoved, swapped or pulled, and it blocks shoves through its line. Recharge: 3.\n\nVICTORY\n«First blood» — the opponent loses one piece. «To the last» — the opponent loses all pieces. If one action knocks out pieces of both players, the acting player wins.</string>
 
     <string name="msg_place">%1$s: place your pieces (%2$d left)</string>
     <string name="msg_place_relaxed">No legal cell — the «not in line with an enemy» rule is lifted</string>
@@ -60,19 +60,20 @@
     <string name="err_anchor">Blocked by an anchored piece</string>
     <string name="err_ability_second">Abilities can only be the second action</string>
     <string name="err_ability_cd">That ability is recharging</string>
-    <string name="err_nothing_shift">No pieces in that line</string>
+    <string name="err_nothing_pull">No enemy piece to pull on a clear line</string>
     <string name="err_swap_own">The swap must include your piece</string>
     <string name="err_not_allowed">You can\'t do that right now</string>
 
     <string name="ability_dash">Dash</string>
     <string name="ability_swap">Swap</string>
-    <string name="ability_shift">Shift</string>
+    <string name="ability_magnet">Magnet</string>
     <string name="ability_anchor">Anchor</string>
     <string name="hint_dash_piece">Dash: choose your piece</string>
     <string name="hint_dash_target">Dash: choose a cell 2 steps away</string>
     <string name="hint_swap_first">Swap: choose the first piece</string>
     <string name="hint_swap_second">Swap: choose the second piece</string>
-    <string name="hint_shift">Shift: tap an arrow at the edge of the board</string>
+    <string name="hint_magnet_piece">Magnet: choose your piece</string>
+    <string name="hint_magnet_target">Magnet: choose an enemy piece to pull</string>
     <string name="hint_anchor">Anchor: choose your piece to protect</string>
     <string name="btn_skip">End turn</string>
     <string name="btn_cancel">Cancel</string>

@@ -127,7 +127,7 @@ class GameView @JvmOverloads constructor(
         val vgap = dp(8f)
         val hudH = dp(72f)
         val msgH = dp(30f)
-        gutter = dp(28f)
+        gutter = dp(12f)
         val abilityH = dp(80f)
         val actionH = dp(46f)
 
@@ -355,7 +355,7 @@ class GameView @JvmOverloads constructor(
             }
             is GameEvent.AbilityUsed -> sounds.add(
                 when (ev.type) {
-                    AbilityType.SHIFT -> SoundManager.SHIFT
+                    AbilityType.MAGNET -> SoundManager.MAGNET
                     AbilityType.SWAP -> SoundManager.SWAP
                     AbilityType.ANCHOR -> SoundManager.ANCHOR
                     else -> SoundManager.ABILITY
@@ -447,7 +447,7 @@ class GameView @JvmOverloads constructor(
     // Interaction state
     // ------------------------------------------------------------------
 
-    private enum class Mode { NORMAL, DASH_PIECE, DASH_TARGET, SWAP_FIRST, SWAP_SECOND, SHIFT, ANCHOR }
+    private enum class Mode { NORMAL, DASH_PIECE, DASH_TARGET, SWAP_FIRST, SWAP_SECOND, MAGNET_PIECE, MAGNET_TARGET, ANCHOR }
 
     private var mode = Mode.NORMAL
     private var selected: Cell? = null
@@ -499,7 +499,7 @@ class GameView @JvmOverloads constructor(
             is BotAction.Move -> engine.tryMove(action.from, action.to)
             is BotAction.Dash -> engine.dash(action.from, action.to)
             is BotAction.Swap -> engine.swap(action.a, action.b)
-            is BotAction.Shift -> engine.shift(action.isRow, action.index, action.dir)
+            is BotAction.Magnet -> engine.magnet(action.from, action.target)
             is BotAction.Anchor -> engine.anchor(action.at)
             BotAction.Skip -> engine.skipSecondAction()
         }
@@ -540,12 +540,6 @@ class GameView @JvmOverloads constructor(
             onActionButton()
             return
         }
-        if (mode == Mode.SHIFT) {
-            arrowAt(x, y)?.let { (isRow, index, dir) ->
-                applyResult(engine.shift(isRow, index, dir))
-                return
-            }
-        }
         val cell = cellAt(x, y) ?: return
         when (mode) {
             Mode.NORMAL -> tapNormal(cell)
@@ -553,8 +547,9 @@ class GameView @JvmOverloads constructor(
             Mode.DASH_TARGET -> tapDashTarget(cell)
             Mode.SWAP_FIRST -> tapSwapFirst(cell)
             Mode.SWAP_SECOND -> tapSwapSecond(cell)
+            Mode.MAGNET_PIECE -> tapMagnetPiece(cell)
+            Mode.MAGNET_TARGET -> tapMagnetTarget(cell)
             Mode.ANCHOR -> tapAnchor(cell)
-            Mode.SHIFT -> { /* handled above */ }
         }
         invalidate()
     }
@@ -644,6 +639,38 @@ class GameView @JvmOverloads constructor(
     private fun dashablePieces(): List<Cell> =
         engine.alive(engine.current).map { it.cell }.filter { engine.dashTargets(it).isNotEmpty() }
 
+    private fun magnetablePieces(): List<Cell> =
+        engine.alive(engine.current).map { it.cell }.filter { engine.magnetTargets(it).isNotEmpty() }
+
+    private fun tapMagnetPiece(cell: Cell) {
+        val piece = engine.pieceAt(cell) ?: return
+        if (piece.player != engine.current) { showErr(Msg.NOT_YOUR_PIECE); return }
+        val targets = engine.magnetTargets(cell)
+        if (targets.isEmpty()) { showErr(Msg.NOTHING_TO_PULL); return }
+        selected = cell
+        hintCells = targets
+        mode = Mode.MAGNET_TARGET
+        SoundManager.play(SoundManager.SELECT)
+    }
+
+    private fun tapMagnetTarget(cell: Cell) {
+        val sel = selected ?: return
+        if (cell == sel) {
+            mode = Mode.MAGNET_PIECE
+            selected = null
+            hintCells = magnetablePieces()
+            return
+        }
+        val piece = engine.pieceAt(cell)
+        if (piece != null && piece.player == engine.current && engine.magnetTargets(cell).isNotEmpty()) {
+            selected = cell
+            hintCells = engine.magnetTargets(cell)
+            SoundManager.play(SoundManager.SELECT)
+            return
+        }
+        if (cell in hintCells) applyResult(engine.magnet(sel, cell))
+    }
+
     private fun onAbilityTapped(type: AbilityType) {
         SoundManager.play(SoundManager.CLICK)
         val gate = engine.abilityGateMsg(type)
@@ -652,7 +679,7 @@ class GameView @JvmOverloads constructor(
         when (type) {
             AbilityType.DASH -> { mode = Mode.DASH_PIECE; hintCells = dashablePieces() }
             AbilityType.SWAP -> { mode = Mode.SWAP_FIRST; hintCells = engine.pieces.filter { it.alive && !it.anchored }.map { it.cell } }
-            AbilityType.SHIFT -> { mode = Mode.SHIFT; hintCells = emptyList() }
+            AbilityType.MAGNET -> { mode = Mode.MAGNET_PIECE; hintCells = magnetablePieces() }
             AbilityType.ANCHOR -> { mode = Mode.ANCHOR; hintCells = engine.alive(engine.current).map { it.cell } }
         }
         invalidate()
@@ -698,7 +725,7 @@ class GameView @JvmOverloads constructor(
             Msg.BLOCKED_BY_ANCHOR -> R.string.err_anchor
             Msg.ABILITY_SECOND_ONLY -> R.string.err_ability_second
             Msg.ABILITY_NOT_READY -> R.string.err_ability_cd
-            Msg.NOTHING_TO_SHIFT -> R.string.err_nothing_shift
+            Msg.NOTHING_TO_PULL -> R.string.err_nothing_pull
             Msg.SWAP_NEEDS_OWN -> R.string.err_swap_own
             else -> R.string.err_not_allowed
         }
@@ -720,7 +747,8 @@ class GameView @JvmOverloads constructor(
             mode == Mode.DASH_TARGET -> context.getString(R.string.hint_dash_target)
             mode == Mode.SWAP_FIRST -> context.getString(R.string.hint_swap_first)
             mode == Mode.SWAP_SECOND -> context.getString(R.string.hint_swap_second)
-            mode == Mode.SHIFT -> context.getString(R.string.hint_shift)
+            mode == Mode.MAGNET_PIECE -> context.getString(R.string.hint_magnet_piece)
+            mode == Mode.MAGNET_TARGET -> context.getString(R.string.hint_magnet_target)
             mode == Mode.ANCHOR -> context.getString(R.string.hint_anchor)
             engine.actionsDone == 0 -> context.getString(R.string.msg_first_action, name(engine.current))
             else -> context.getString(R.string.msg_second_action, name(engine.current))
@@ -733,54 +761,6 @@ class GameView @JvmOverloads constructor(
         mode != Mode.NORMAL -> context.getString(R.string.btn_cancel)
         engine.actionsDone == 1 -> context.getString(R.string.btn_skip)
         else -> null
-    }
-
-    // ------------------------------------------------------------------
-    // Shift arrows
-    // ------------------------------------------------------------------
-
-    private fun arrowAt(x: Float, y: Float): Triple<Boolean, Int, Direction>? {
-        val s = engine.size
-        // columns: above / below the board
-        if (x >= boardLeft && x < boardLeft + boardSide) {
-            val c = ((x - boardLeft) / cellSize).toInt().coerceIn(0, s - 1)
-            if (y in (boardTop - gutter)..boardTop) return Triple(false, c, Direction.UP)
-            if (y in (boardTop + boardSide)..(boardTop + boardSide + gutter))
-                return Triple(false, c, Direction.DOWN)
-        }
-        // rows: left / right of the board
-        if (y >= boardTop && y < boardTop + boardSide) {
-            val r = ((y - boardTop) / cellSize).toInt().coerceIn(0, s - 1)
-            if (x in (boardLeft - gutter)..boardLeft) return Triple(true, r, Direction.LEFT)
-            if (x in (boardLeft + boardSide)..(boardLeft + boardSide + gutter))
-                return Triple(true, r, Direction.RIGHT)
-        }
-        return null
-    }
-
-    private fun drawArrow(canvas: Canvas, cx: Float, cy: Float, dir: Direction, enabled: Boolean) {
-        val h = gutter * 0.42f
-        val w = gutter * 0.42f
-        val path = Path()
-        when (dir) {
-            Direction.UP -> {
-                path.moveTo(cx, cy - h / 2); path.lineTo(cx - w, cy + h / 2); path.lineTo(cx + w, cy + h / 2)
-            }
-            Direction.DOWN -> {
-                path.moveTo(cx, cy + h / 2); path.lineTo(cx - w, cy - h / 2); path.lineTo(cx + w, cy - h / 2)
-            }
-            Direction.LEFT -> {
-                path.moveTo(cx - h / 2, cy); path.lineTo(cx + h / 2, cy - w); path.lineTo(cx + h / 2, cy + w)
-            }
-            Direction.RIGHT -> {
-                path.moveTo(cx + h / 2, cy); path.lineTo(cx - h / 2, cy - w); path.lineTo(cx - h / 2, cy + w)
-            }
-        }
-        path.close()
-        fill.color = if (enabled) cGold else cDisabled
-        fill.alpha = if (enabled) 255 else 70
-        canvas.drawPath(path, fill)
-        fill.alpha = 255
     }
 
     // ------------------------------------------------------------------
@@ -949,7 +929,8 @@ class GameView @JvmOverloads constructor(
                 fill.color = if (occupied) cHintOrange else cHintGreen
                 fill.alpha = 235
                 val rad = if (mode == Mode.DASH_PIECE || mode == Mode.SWAP_FIRST ||
-                    mode == Mode.SWAP_SECOND || mode == Mode.ANCHOR
+                    mode == Mode.SWAP_SECOND || mode == Mode.ANCHOR ||
+                    mode == Mode.MAGNET_PIECE || mode == Mode.MAGNET_TARGET
                 ) cellSize * 0.44f else cellSize * 0.13f
                 if (rad > cellSize * 0.3f) {
                     stroke.color = fill.color
@@ -972,17 +953,6 @@ class GameView @JvmOverloads constructor(
             stroke.alpha = 255
         }
 
-        // shift arrows
-        if (mode == Mode.SHIFT && humanTurn) {
-            for (i in 0 until s) {
-                val cx = boardLeft + (i + 0.5f) * cellSize
-                val cy = boardTop + (i + 0.5f) * cellSize
-                drawArrow(canvas, cx, boardTop - gutter * 0.5f, Direction.UP, engine.canShift(false, i, Direction.UP))
-                drawArrow(canvas, cx, boardTop + boardSide + gutter * 0.5f, Direction.DOWN, engine.canShift(false, i, Direction.DOWN))
-                drawArrow(canvas, boardLeft - gutter * 0.5f, cy, Direction.LEFT, engine.canShift(true, i, Direction.LEFT))
-                drawArrow(canvas, boardLeft + boardSide + gutter * 0.5f, cy, Direction.RIGHT, engine.canShift(true, i, Direction.RIGHT))
-            }
-        }
     }
 
     private fun drawSprites(canvas: Canvas) {
@@ -1080,7 +1050,7 @@ class GameView @JvmOverloads constructor(
         when (type) {
             AbilityType.DASH -> R.string.ability_dash
             AbilityType.SWAP -> R.string.ability_swap
-            AbilityType.SHIFT -> R.string.ability_shift
+            AbilityType.MAGNET -> R.string.ability_magnet
             AbilityType.ANCHOR -> R.string.ability_anchor
         }
     )
@@ -1105,14 +1075,15 @@ class GameView @JvmOverloads constructor(
                 p.moveTo(cx - r * 0.3f, cy + r * 0.05f); p.lineTo(cx - r * 0.75f, cy + r * 0.5f); p.lineTo(cx - r * 0.3f, cy + r * 0.95f)
                 canvas.drawPath(p, stroke)
             }
-            AbilityType.SHIFT -> {
+            AbilityType.MAGNET -> {
                 val p = Path()
-                for (i in -1..1) {
-                    val yy = cy + i * r * 0.65f
-                    p.moveTo(cx - r, yy); p.lineTo(cx + r * 0.45f, yy)
-                }
-                p.moveTo(cx + r * 0.15f, cy - r * 0.45f); p.lineTo(cx + r * 0.85f, cy); p.lineTo(cx + r * 0.15f, cy + r * 0.45f)
+                val oval = RectF(cx - r * 0.75f, cy - r * 1.05f, cx + r * 0.75f, cy + r * 0.45f)
+                p.addArc(oval, 180f, 180f)
+                p.moveTo(cx - r * 0.75f, cy - r * 0.3f); p.lineTo(cx - r * 0.75f, cy + r * 0.25f)
+                p.moveTo(cx + r * 0.75f, cy - r * 0.3f); p.lineTo(cx + r * 0.75f, cy + r * 0.25f)
                 canvas.drawPath(p, stroke)
+                fill.color = color
+                canvas.drawCircle(cx, cy + r * 0.75f, r * 0.22f, fill)
             }
             AbilityType.ANCHOR -> {
                 val p = Path()

@@ -18,7 +18,7 @@ The original pygame prototype is preserved in `legacy/`.
 - **Setup:** not on the edge, not in the center, not in line with an enemy piece (auto-relaxed if impossible).
 - **A turn = two actions.** Action 1: move a piece 1 cell. Action 2: move a *different* piece, use one ability, or end the turn. A sole surviving piece may move twice.
 - **Shoving:** moving into an occupied cell pushes the whole chain — pieces shoved over the edge are out (your own too!).
-- **Abilities** (second action only): **Dash** (2-cell pushing move, cd 3), **Swap** (your piece ↔ any piece, cd 4), **Shift** (slide a row/column, edge pieces fall off, cd 4), **Anchor** (piece becomes unpushable for a turn and blocks shoves/shifts, cd 3).
+- **Abilities** (second action only): **Dash** (2-cell pushing move, cd 3), **Swap** (your piece ↔ any piece, cd 4), **Magnet** (pull an enemy piece 1 cell toward yours along a clear line — never off the board, cd 3), **Anchor** (piece becomes unpushable/unpullable for a turn and blocks shoves through its line, cd 3).
 - **Win modes:** *First blood* or *To the last piece*. If one action eliminates pieces of both players, the acting player wins.
 - Modes: 2 players on one phone, or vs bot (easy / medium / hard). Rematch swaps who goes first; session score is tracked.
 
